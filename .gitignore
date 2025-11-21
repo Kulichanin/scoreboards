@@ -45,3 +45,7 @@ test/data
 # Ignore environment variables and config
 configs/.env
 configs/scoreboards.yaml
+
+# Ignore db file
+*.sql.gz
+*.sql

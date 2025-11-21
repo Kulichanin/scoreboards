@@ -3,21 +3,18 @@
 services:
 
   db:
-    image: postgres
+    image: postgres:18.1
     restart: always
     # set shared memory limit when using docker compose
     shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    volumes:
+    - ./db/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    - ../test/data/demo-20250901-3m.sql.gz:/data/demo-20250901-3m.sql.gz
+    - ../test/data/:/var/lib/postgresql
     environment:
-      POSTGRES_PASSWORD: example
-
-  adminer:
-    image: adminer
-    restart: always
+      POSTGRES_PASSWORD: root123
+      SCOREBOARDS_PASSWORD: test123
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
     ports:
-      - 8080:8080
+      - 5432:5432

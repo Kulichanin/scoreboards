@@ -38,3 +38,10 @@ testing/kokoro/test-env.sh
 .DS_Store
 go.work.sum
 sponge_log.xml
+
+# Test data database path
+test/data
+
+# Ignore environment variables and config
+configs/.env
+configs/scoreboards.yaml

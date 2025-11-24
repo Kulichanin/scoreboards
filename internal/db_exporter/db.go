@@ -8,6 +8,7 @@ import (
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
+// Завернуть все в интерфейс для передачи состояния БД в отдельном и работы с ней через интерфейс.
 func Pingdb(urlBd string) error {
 	db, err := sql.Open("pgx", urlBd)
 	if err != nil {
